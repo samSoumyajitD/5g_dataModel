@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="mermaid">
+    classDiagram
+    UserEquipment --> RAN: connects
+    RAN --> AMF: forwards
+    AMF --> SMF: forwards
+    SMF --> UPF: configures
+    SMF --> PCF: requests
+    SMF --> NRF: discovers
+    SMF --> NSSF: selects
+    AMF --> AUSF: authenticates
+    AMF --> UDM: retrieves
+    AMF --> NSSF: selects
+    AUSF --> UDM: validates
+    AUSF --> AMF: authenticates
+    UDM --> AUSF: validates
+    UDM --> AMF: provides
+    PCF --> UDM: retrieves
+    PCF --> SMF: enforces
+    UPF --> DN: routes
+    UPF --> SMF: reports
+    DN --> UPF: delivers
+
+    class UserEquipment {
+      +connectToRAN()
+      +sendRequest()
+      -userData: String
+      -locationData: String
+      -deviceID: String
+      -IMSI: String
+      -IMEI: String
+    }
+    class RAN {
+      +forwardToAMF()
+      -signalData: String
+    }
+    class AMF {
+      +connectUser()
+      +forwardRequest()
+      +authenticateUser()
+      +retrieveSubscription()
+      -sessionData: String
+      -subscriptionData: String
+      -locationData: String
+    }
+    class SMF {
+      +requestSession()
+      +configureUPF()
+      +retrieveUserData()
+      +enforcePolicies()
+      -sessionData: String
+      -policyData: String
+    }
+    class UPF {
+      +routeTraffic()
+      +reportStatus()
+      +handleData()
+      -trafficData: String
+      -statusData: String
+    }
+    class PCF {
+      +controlPolicy()
+      +retrievePolicyData()
+      +enforcePolicy()
+      -policyData: String
+    }
+    class DN {
+      +routeData()
+      +deliverData()
+      -dataPackets: String
+    }
+    class AUSF {
+      +authenticate()
+      +validateData()
+      +provideAuthentication()
+      -authData: String
+      -validationData: String
+    }
+    class UDM {
+      +retrieveSubscriptionData()
+      +updateSubscriptionData()
+      +validateUserData()
+      -subscriptionData: String
+      -userData: String
+      -IMSI: String
+      -IMEI: String
+      -locationData: String
+    }
+    class NRF {
+      +discoverServices()
+      +registerService()
+      +provideService()
+      -serviceData: String
+    }
+    class NSSF {
+      +selectNetworkSlice()
+      +provideSliceInfo()
+      -sliceData: String
+    }
+  </div>
+
+  <script>
+    mermaid.initialize({startOnLoad:true});
+  </script>
+</body>
+</html>
