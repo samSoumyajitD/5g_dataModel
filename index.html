@@ -1,111 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5G Network Architecture</title>
   <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin: 20px;
+      color: #333;
+    }
+    .diagram-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 100%;
+      overflow-x: auto;
+      transform: scale(1.5); /* Increase size */
+      transform-origin: top left;
+    }
+    .mermaid {
+      text-align: center;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-  <div class="mermaid">
-    classDiagram
-    UserEquipment --> RAN: connects
-    RAN --> AMF: forwards
-    AMF --> SMF: forwards
-    SMF --> UPF: configures
-    SMF --> PCF: requests
-    SMF --> NRF: discovers
-    SMF --> NSSF: selects
-    AMF --> AUSF: authenticates
-    AMF --> UDM: retrieves
-    AMF --> NSSF: selects
-    AUSF --> UDM: validates
-    AUSF --> AMF: authenticates
-    UDM --> AUSF: validates
-    UDM --> AMF: provides
-    PCF --> UDM: retrieves
-    PCF --> SMF: enforces
-    UPF --> DN: routes
-    UPF --> SMF: reports
-    DN --> UPF: delivers
+ 
+  <div class="diagram-container">
+    <div class="mermaid">
+      classDiagram
+      UserEquipment --> RAN: connects
+      RAN --> AMF: forwards
+      AMF --> SMF: forwards
+      SMF --> UPF: configures
+      SMF --> PCF: requests
+      SMF --> NRF: discovers
+      SMF --> NSSF: selects
+      AMF --> AUSF: authenticates
+      AMF --> UDM: retrieves
+      AMF --> NSSF: selects
+      AUSF --> UDM: validates
+      AUSF --> AMF: authenticates
+      UDM --> AUSF: validates
+      UDM --> AMF: provides
+      PCF --> UDM: retrieves
+      PCF --> SMF: enforces
+      UPF --> DN: routes
+      UPF --> SMF: reports
+      DN --> UPF: delivers
 
-    class UserEquipment {
-      +connectToRAN()
-      +sendRequest()
-      -userData: String
-      -locationData: String
-      -deviceID: String
-      -IMSI: String
-      -IMEI: String
-    }
-    class RAN {
-      +forwardToAMF()
-      -signalData: String
-    }
-    class AMF {
-      +connectUser()
-      +forwardRequest()
-      +authenticateUser()
-      +retrieveSubscription()
-      -sessionData: String
-      -subscriptionData: String
-      -locationData: String
-    }
-    class SMF {
-      +requestSession()
-      +configureUPF()
-      +retrieveUserData()
-      +enforcePolicies()
-      -sessionData: String
-      -policyData: String
-    }
-    class UPF {
-      +routeTraffic()
-      +reportStatus()
-      +handleData()
-      -trafficData: String
-      -statusData: String
-    }
-    class PCF {
-      +controlPolicy()
-      +retrievePolicyData()
-      +enforcePolicy()
-      -policyData: String
-    }
-    class DN {
-      +routeData()
-      +deliverData()
-      -dataPackets: String
-    }
-    class AUSF {
-      +authenticate()
-      +validateData()
-      +provideAuthentication()
-      -authData: String
-      -validationData: String
-    }
-    class UDM {
-      +retrieveSubscriptionData()
-      +updateSubscriptionData()
-      +validateUserData()
-      -subscriptionData: String
-      -userData: String
-      -IMSI: String
-      -IMEI: String
-      -locationData: String
-    }
-    class NRF {
-      +discoverServices()
-      +registerService()
-      +provideService()
-      -serviceData: String
-    }
-    class NSSF {
-      +selectNetworkSlice()
-      +provideSliceInfo()
-      -sliceData: String
-    }
+      class UserEquipment {
+        +connectToRAN()
+        +sendRequest()
+        -userData: String
+        -locationData: String
+        -deviceID: String
+        -IMSI: String
+        -IMEI: String
+      }
+      class RAN {
+        +forwardToAMF()
+        -signalData: String
+      }
+      class AMF {
+        +connectUser()
+        +forwardRequest()
+        +authenticateUser()
+        +retrieveSubscription()
+        -sessionData: String
+        -subscriptionData: String
+        -locationData: String
+      }
+      class SMF {
+        +requestSession()
+        +configureUPF()
+        +retrieveUserData()
+        +enforcePolicies()
+        -sessionData: String
+        -policyData: String
+      }
+      class UPF {
+        +routeTraffic()
+        +reportStatus()
+        +handleData()
+        -trafficData: String
+        -statusData: String
+      }
+      class PCF {
+        +controlPolicy()
+        +retrievePolicyData()
+        +enforcePolicy()
+        -policyData: String
+      }
+      class DN {
+        +routeData()
+        +deliverData()
+        -dataPackets: String
+      }
+      class AUSF {
+        +authenticate()
+        +validateData()
+        +provideAuthentication()
+        -authData: String
+        -validationData: String
+      }
+      class UDM {
+        +retrieveSubscriptionData()
+        +updateSubscriptionData()
+        +validateUserData()
+        -subscriptionData: String
+        -userData: String
+        -IMSI: String
+        -IMEI: String
+        -locationData: String
+      }
+      class NRF {
+        +discoverServices()
+        +registerService()
+        +provideService()
+        -serviceData: String
+      }
+      class NSSF {
+        +selectNetworkSlice()
+        +provideSliceInfo()
+        -sliceData: String
+      }
+    </div>
   </div>
 
   <script>
-    mermaid.initialize({startOnLoad:true});
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default', // You can change the theme here
+      themeVariables: {
+        primaryColor: '#3498db',
+        secondaryColor: '#2ecc71',
+        tertiaryColor: '#ecf0f1',
+        lineColor: '#34495e',
+        textColor: '#2c3e50'
+      }
+    });
   </script>
 </body>
 </html>
